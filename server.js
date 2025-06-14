@@ -23,7 +23,7 @@ app.use("/cart", cartRoute); // 🛒 Cart
 
 // ✅ MongoDB Connection
 mongoose
-  .connect("mongodb://localhost:27017/breakout", {
+  .connect(process.env.DATABASE_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
