@@ -1,0 +1,28 @@
+{
+  "name": "outfitter-backend",
+  "version": "1.0.0",
+  "description": "Backend for student CRUD app using Node.js, Express, MongoDB",
+  "main": "server.js",
+ "scripts": {
+  "start": " nodemon server.js",
+  "start:prod": "node server.js"
+},
+
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "cose": "^0.0.2",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.9.2",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
