@@ -25,7 +25,7 @@ app.use("/cart", cartRoute); // 🛒 Cart
 
 async function startServer() {
   try {
-    await mongoose.connect("mongodb+srv://soban663434:soban663434@cluster0.gww34n9.mongodb.net/sample_mflix?retryWrites=true&w=majority&appName=Cluster0", {
+    await mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
@@ -46,21 +46,3 @@ async function startServer() {
 }
 
 startServer();
-// // ✅ MongoDB Connection
-// mongoose
-//   .connect("mongodb+srv://soban663434:soban663434@cluster0.gww34n9.mongodb.net/outfitter?retryWrites=true&w=majority", {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   })
-//   .then(() => console.log("✅ MongoDB connected successfully"))
-//   .catch((err) => console.error("❌ MongoDB connection failed:", err));
-
-// app.get("/", (req, res) => {
-//   res.send("Hello from railway + Express!");
-// });
-
-// // ✅ Start Express Server
-// const PORT = process.env.PORT || 7474;
-// app.listen(PORT, () => {
-//   console.log(`🚀 Server running at http://localhost:${PORT}`);
-// });
