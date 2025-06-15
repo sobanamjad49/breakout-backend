@@ -31,6 +31,10 @@ mongoose
   .then(() => console.log("✅ MongoDB connected successfully"))
   .catch((err) => console.error("❌ MongoDB connection failed:", err));
 
+app.get("/", (req, res) => {
+  res.send("Hello from railway + Express!");
+});
+
 // ✅ Start Express Server
 const PORT = process.env.PORT || 7474;
 app.listen(PORT, () => {
