@@ -147,21 +147,34 @@ router.put("/update", async (req, res) => {
   }
 });
 
-// ✅ Delete entire cart by cart ID (admin use)
-router.delete("/delete/:cartId", async (req, res) => {
+
+// ✅ Remove a single item from cart
+router.delete("/removeItem/:userId/:itemId", async (req, res) => {
   try {
-    const { cartId } = req.params;
-    const deletedCart = await Cart.findByIdAndDelete(cartId);
+    const { userId, itemId } = req.params;
 
-    if (!deletedCart) {
-      return res.status(404).json({ message: "Cart not found" });
-    }
+    const cart = await Cart.findOne({ userId });
+    if (!cart) return res.status(404).json({ message: "Cart not found" });
 
-    res.json({ message: "Cart deleted successfully" });
+    cart.items = cart.items.filter((item) => item._id.toString() !== itemId);
+
+    // Recalculate total amount
+    const allProducts = await Product.find({ _id: { $in: cart.items.map(i => i.productId) } });
+    const productMap = {};
+    allProducts.forEach(p => (productMap[p._id] = p));
+
+    cart.totalAmount = cart.items.reduce(
+      (sum, item) => sum + (productMap[item.productId]?.price || 0) * item.quantity,
+      0
+    );
+
+    await cart.save();
+    res.json({ message: "Item removed from cart" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
+
 
 // ✅ Clear user's cart
 router.delete("/clear/:userId", async (req, res) => {

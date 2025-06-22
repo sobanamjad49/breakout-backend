@@ -8,7 +8,7 @@ const productRoute = require("./Routes/productsRoute");
 const orderRoute = require("./Routes/orderRoute");
 const cartRoute = require("./Routes/cartRoute");
 const authRoutes = require("./Routes/authRoutes"); // Admin/User login route
-
+const dashboardRoutes = require("./Routes/summary");
 const app = express();
 
 // ✅ Middleware
@@ -21,7 +21,7 @@ app.use("/users", userRoute); // 👤 User-related routes
 app.use("/products", productRoute); // 🛍️ Product management
 app.use("/orders", orderRoute); // 📦 Orders
 app.use("/cart", cartRoute); // 🛒 Cart
-
+app.use("/summary", dashboardRoutes);// Import summary route
 
 async function startServer() {
   try {
